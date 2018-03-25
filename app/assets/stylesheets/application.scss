@@ -46,12 +46,10 @@
 }
 
 .searcher {
-  margin-top: 40px;
+  margin-top: 30px;
 
   display: flex;
-  justify-content: center;
   align-items: center;
-
   flex-direction: column;
 }
 
@@ -77,4 +75,26 @@
 
 .advanced-form {
   margin-top: 20px;
+}
+
+.drinks-list {
+  margin-top: 60px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.drink-card {
+  width: 820px;
+  display: flex;
+  flex-direction: row;
+}
+
+.drink-card__img {
+  width: 220px;
+  height: 220px;
+}
+
+.drink-card__body {
+  padding: 20px;
 }
