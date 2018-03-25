@@ -1,3 +1,35 @@
 <div>
-  <%= react_component("HelloWorld", { greeting: "Hello" }) %>
+  <div class="header gradient">
+    <%= image_tag 'cocktail-white.svg', class: 'icon' %>
+    <div class="header__title">The drink searcher</div>
+  </div>
+
+  <div class="searcher">
+    <div class="searcher__radio">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="searchRadio" id="simpleSearch" value="simple" checked>
+        <label class="form-check-label" for="simpleSearch">Simple search</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="searchRadio" id="advancedSearch" value="advanced">
+        <label class="form-check-label" for="advancedSearch">Advanced search</label>
+      </div>
+    </div>
+
+    <%= form_tag do %>
+      <div class="simple-form">
+        <div class="simple-form__input">
+          <input class="form-control form-control-lg" type="text" placeholder="Try a Martini..">
+        </div>
+        <div class="simple-form__btn">
+          <button type="submit" class="btn btn-outline-primary btn-lg">Search</button>
+        </div>
+      </div>
+
+      <div class="advanced-form" style="display:none;">
+        advanced search
+      </div>
+    <% end %>
+  </div>
+
 </div>
