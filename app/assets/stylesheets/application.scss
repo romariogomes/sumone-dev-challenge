@@ -93,6 +93,9 @@
 .drink-card__img {
   width: 220px;
   height: 220px;
+
+  border-top-left-radius: 0.25em;
+  border-bottom-left-radius: 0.25em;
 }
 
 .drink-card__body {
