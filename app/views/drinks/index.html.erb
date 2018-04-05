@@ -8,11 +8,11 @@
     <div class="searcher__radio">
       <div class="form-check">
         <input class="form-check-input" type="radio" name="searchRadio" id="simpleSearch" value="simple" checked>
-        <label class="form-check-label" for="simpleSearch">Simple search</label>
+        <label class="form-check-label" for="simpleSearch">Easy search</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="searchRadio" id="advancedSearch" value="advanced">
-        <label class="form-check-label" for="advancedSearch">Advanced search</label>
+        <label class="form-check-label" for="advancedSearch">Recommend me ;)</label>
       </div>
     </div>
 
@@ -27,18 +27,20 @@
       </div>
 
       <div class="advanced-form" style="display:none;">
-        advanced search
+        User inputs to search a collection of drinks based on given recommendations.
       </div>
     <% end %>
   </div>
 
   <div class="drinks-list">
-    <div class="card drink-card">
-      <%= image_tag 'http://cdn3.foodviva.com/static-content/food-images/martini-recipes/blueberry-martini-recipe/blueberry-martini-recipe.jpg', class: 'drink-card__img' %>
-      <div class="drink-card__body">
-        <h2>Martini</h2>
-        <p>description</p>
+    <% @drinks.each do |drink| %>
+      <div class="card drink-card">
+        <%= image_tag drink.image_url, class: 'drink-card__img' %>
+        <div class="drink-card__body">
+          <h2><%= drink.name %></h2>
+          <p><%= drink.description %></p>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
