@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180405221717) do
     t.string "origin"
     t.integer "ibu"
     t.string "drinkware"
+    t.decimal "rating_avg"
   end
 
 end

@@ -7,5 +7,6 @@ class AddValuesToDrinks < ActiveRecord::Migration[5.1]
     add_column :drinks, :origin, :string
     add_column :drinks, :ibu, :integer
     add_column :drinks, :drinkware, :string
+    add_column :drinks, :rating_avg, :decimal
   end
 end
