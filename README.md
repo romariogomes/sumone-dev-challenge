@@ -17,7 +17,7 @@ sistemas, e é nesses aspectos que vamos mirar nesse desafio.
 
 O projeto está utilizando o ruby versão `2.4.1`. A versão do rails é a `5.1.4`.
 
-Para criar o banco de dados localmente rode:
+Para criar o banco de dados:
 
 `$ bundle exec rails db:create db:migrate db:seed`
 
@@ -31,20 +31,15 @@ Implementar novas funcionalidades ao um sistema de busca e recomendação de dri
 #### Objetivos específicos
 
 * Implementar a "Easy Search", ou seja, uma busca simples apenas por nome do drink. Essa busca deve
-ordenar os drinks por nome e data de criação. Além disso, deve ser feito paginação, com 10 items por página.
-
-* Adicionar testes referentes a "Easy Search", utilizando a estrutura já existente no projeto com o RSPEC.
-O teste deve ser capaz de verificar a funcionalidade de busca por texto e da ordenação.
-
-* Na listagem de drinks, alguns atributos como _nome, descrição e imagem_ já estão sendo mostrados no Card. Você
-deve adicionar pelo menos mais 3 atributos a serem exibidos no card do Drink, da maneira que preferir escolher e
-exibir.
+ordenar os drinks por nome e data de criação. Além disso, deve ser feito paginação, com 10 items por página. Adicionar testes referentes as funcionalidades,
+utilizando a estrutura já existente no projeto com o RSPEC. O teste deve ser capaz de verificar a funcionalidade de busca por texto e da ordenação.
 
 * Implementar a "Recommended Search", ou seja, a busca por recomendação de drink. No model Drink, existem diversos
 atributos que são características comuns de um drink. Através da busca por recomendação, o usuário deve ser capaz
-de inserir diversas informações sobre essas características para que seja retornada uma lista de drinks. Essa lista
-deve estar ordenada pelo critério de qual drink satisfaz melhor os campos inseridos pelo usuário. O algoritmo de recomendação
-deve ser de sua escolha/criatividade. Aproveite para inovar aqui, pois é onde queremos ver sua maneira de resolver problemas.
+de inserir informações sobre essas características para que seja retornada uma lista de drinks. Essa lista
+deve estar ordenada pelo critério de qual drink satisfaz melhor os campos inseridos pelo usuário. Além disso, drinks que não
+satisfizerem a recomendação, não devem aparecer na listagem. O algoritmo de recomendação deve ser de sua escolha/criatividade.
+Aproveite para inovar aqui, pois é onde queremos ver sua maneira de resolver problemas.
 
 * A disposição e tipo dos campos utilizados na view para "Recommended Search" podem ser escolhido por você (Ex: CheckBox, Botão, Slider, Select, etc..).
 Lembrando que é apenas necessário que o usuário possa escolher entre todos os atributos disponíveis (não é necessário nome e descrição)
