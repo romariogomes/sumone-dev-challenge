@@ -53,4 +53,6 @@ vez que o usuário realizar uma busca.
 
 * Implementação do algoritmo de recomendação de drink
 
-* Estrutura e organização do código e dos testes
+* Estrutura e organização do código de todas as funcionalidades implementadas
+
+* Estrutura e organização dos testes
