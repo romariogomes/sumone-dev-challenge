@@ -15,7 +15,7 @@ sistemas, e é nesses aspectos que vamos mirar nesse desafio.
 
 ### Requisitos para rodar o projeto
 
-O projeto está utilizando o ruby versão `2.4.1`. A versão do rails é a `5.1.4`.
+O projeto está utilizando o ruby versão `2.4.2`. A versão do rails é a `5.1.4`.
 
 Para criar o banco de dados:
 
@@ -28,34 +28,29 @@ para você realizar seus testes.
 #### Objetivo geral
 Implementar novas funcionalidades ao um sistema de busca e recomendação de drinks.
 
-#### Objetivos específicos
+#### Objetivos principais
 
-* Implementar a "Easy Search", ou seja, uma busca simples apenas por nome do drink. Essa busca deve
-ordenar os drinks por nome e data de criação. Além disso, deve ser feito paginação, com 10 items por página. Adicionar testes referentes as funcionalidades,
-utilizando a estrutura já existente no projeto com o RSPEC. O teste deve ser capaz de verificar a funcionalidade de busca por texto e da ordenação.
+* Implementar uma funcionalidade de recomendação de drink para o usuário utilizando os campos que existem no modelo de Drink, ou seja, permitir que o usuário informe as preferências dele em um formulário, e usar essas preferências para recomendar uma ou mais bebidas para ele. Fique a vontade para decidir como e quantas informações o usuário vai informar, e qual algoritmo vai ser utilizado para escolher a recomendação para o usuário.
 
-* Implementar a "Recommended Search", ou seja, a busca por recomendação de drink. No model Drink, existem diversos
-atributos que são características comuns de um drink. Através da busca por recomendação, o usuário deve ser capaz
-de inserir informações sobre essas características para que seja retornada uma lista de drinks. Essa lista
-deve estar ordenada pelo critério de qual drink satisfaz melhor os campos inseridos pelo usuário. Além disso, drinks que não
-satisfizerem a recomendação, não devem aparecer na listagem. O algoritmo de recomendação deve ser de sua escolha/criatividade.
-Aproveite para inovar aqui, pois é onde queremos ver sua maneira de resolver problemas.
+#### Objetivos secundários
 
-* A disposição e tipo dos campos utilizados na view para "Recommended Search" podem ser escolhido por você (Ex: CheckBox, Botão, Slider, Select, etc..).
-Lembrando que é apenas necessário que o usuário possa escolher entre todos os atributos disponíveis (não é necessário nome e descrição)
-para essa busca no model de Drink.
+* Implementar um filtro simples por nome na tela inicial, trazendo os resultados ordenados por nome e adicionando paginação para mostrar somente 10 itens por página.
 
-* Adicionar os testes unitários referentes ao algoritmo implementada na "Recommended Search".
+* Fazer ao menos testes unitários para serviços e métodos criados para a recomendação e a busca simples por nome, mas não se limitando, testes são sempre bem vindos.
 
 #### Sugestões espertas ;)
 
 * As buscas podem ser implementadas de maneira assíncrona via javascript, sem a necessidade de recarregar a página cada
 vez que o usuário realizar uma busca.
 
-* O campo de descrição do Drink também contém informações interessantes para realizar a "Recommended Search" :)
+* O campo de descrição do Drink também contém informações interessantes para realizar a recomendação de drink :)
 
-* Também é legal fazer algum teste para as views.
-
-* Facilite a sua e a nossa vida, coloque o projeto no heroku ou outra plataforma :).
+* Utilizar alguma plataforma para fazer deploy e deixar o projeto rodando, podendo ser o heroku.
 
 * Você pode utilizar algumas `gems` para o que julgar necessário. Mas o algoritmo de recomendação é de sua responsabilidade.
+
+#### O que vamos avaliar
+
+* Implementação do algoritmo de recomendação de drink
+
+* Estrutura e organização do código e dos testes
