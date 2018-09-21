@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SumOne Programming Challenge
 
 ## The drink searcher
@@ -57,7 +56,3 @@ vez que o usuário realizar uma busca.
 * Estrutura e organização do código de todas as funcionalidades implementadas
 
 * Estrutura e organização dos testes
-=======
-# sumone-dev-challenge
-Dev challenge SumOne
->>>>>>> origin/master
