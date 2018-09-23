@@ -1,0 +1,16 @@
+<div class="drinks-list">
+  <% if @drinks.size == 0 %>
+    <h4>Nenhum resultado encontrado</h4>
+  <% else %>
+    <%= @drinks.size %> <%= 'Result'.pluralize @drinks.size %>
+    <% @drinks.each do |drink| %>
+      <div class="card drink-card">
+        <%= image_tag drink.image_url, class: 'drink-card__img' %>
+        <div class="drink-card__body">
+          <h2><%= drink.name %></h2>
+          <p><%= drink.description %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

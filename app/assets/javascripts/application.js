@@ -27,6 +27,21 @@ function ready(event) {
       $('.advanced-form').show();
     }
   });
+
+  $('#search-btn').click(function() {
+
+    var data = JSON.stringify({ drink_name: $('#drink_name').val()});
+    $.ajax({
+        async: false,
+        timeout: 4000,
+        type: 'POST',
+        url: '/search_drink',
+        data: data,
+        contentType: 'application/json; charset=utf-8'
+    });
+  });
 }
+
+
 
 $(document).on('turbolinks:load', ready);

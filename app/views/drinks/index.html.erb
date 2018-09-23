@@ -19,10 +19,14 @@
     <%= form_tag do %>
       <div class="simple-form">
         <div class="simple-form__input">
-          <input class="form-control form-control-lg" type="text" placeholder="Try a Martini..">
+          <!-- <input class="form-control form-control-lg" type="text" placeholder="Try a Martini.."> -->
+          <%= text_field_tag :drink_name, params[:drink], class: 'form-control form-control-lg', placeholder: 'Try a Martini..' %>
         </div>
-        <div class="simple-form__btn">
-          <button type="submit" class="btn btn-outline-primary btn-lg">Search</button>
+        <div class="simple-form__btn" id="search-drinks-btn">
+          <!-- <button type="submit" class="btn btn-outline-primary btn-lg">Search</button> -->
+          <%= link_to 'javascript:;', id: "search-btn", class: "btn btn-outline-primary btn-lg", remote: true do %>
+            Search
+          <% end %>
         </div>
       </div>
 
@@ -32,15 +36,14 @@
     <% end %>
   </div>
 
-  <div class="drinks-list">
-    <% @drinks.each do |drink| %>
-      <div class="card drink-card">
-        <%= image_tag drink.image_url, class: 'drink-card__img' %>
-        <div class="drink-card__body">
-          <h2><%= drink.name %></h2>
-          <p><%= drink.description %></p>
-        </div>
-      </div>
-    <% end %>
+  <div id="results">
+    
   </div>
 </div>
+
+<script>
+
+  
+
+  
+</script>
