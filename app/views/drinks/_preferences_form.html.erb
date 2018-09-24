@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="form-group">
+    <h4>Set your drink preferences</h4>
+    <%= form_tag do %>
+      <div class="preferences-form-field">
+        <% min_alcoholic_level = Drink.all.min_by(&:alcohol_level).alcohol_level.to_i %>
+        <% max_alcoholic_level = Drink.all.max_by(&:alcohol_level).alcohol_level.to_i %>
+        <% drinks_temperature = Drink.all.order(:temperature).uniq { |drink| drink.temperature } %>
+
+        <%= label_tag 'alcohol_level', 'Alcohol level (%)' %>
+        <%= number_field(:drink, :alcohol_level, in: min_alcoholic_level..max_alcoholic_level, step: 1, class: 'form-control', placeholder: 'e.g. 30') %>
+      </div>
+      <div class="preferences-form-field">
+        <%= label_tag 'base_ingredient', 'Base ingredient' %>
+        <%= collection_select(:drink, :base_ingredient, Drink.all.order(:base_ingredient).uniq { |drink| drink.base_ingredient }, :base_ingredient, :base_ingredient, {:prompt=> 'Select your favorite base ingredient'}, {:class => 'form-control'}) %>
+      </div>
+      <div class="preferences-form-field">
+        <%= label_tag 'temperature', 'Temperature' %>
+        <%= collection_select(:drink, :temperature, drinks_temperature.sort_by { |drink| drink.temperature }, :temperature, :temperature, {:prompt=> 'Select your favorite drink temperature'}, {:class => 'form-control'}) %>
+      </div>
+
+      <div class="preferences-form-field">
+        <%= label_tag 'temperature', 'Type' %>
+        <%= select(:drink, :distilled, ['distilled', 'fermented'], {:prompt=> 'Select your favorite drink type'}, {:class => 'form-control'}) %>
+      </div>
+      <div class="preferences-form-field">
+        <%= link_to 'javascript:;', id: "search-recommendations-btn", class: "btn btn-outline-primary btn-lg", remote: true do %>
+          Search
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+
+$('#search-recommendations-btn').click(function() {
+    var recommendation_params = {
+      // authenticity_token: $('meta[name="csrf-token"]').attr("content"),
+      alcohol_level: $('#drink_alcohol_level').val(),
+      temperature: $('#drink_temperature').val(),
+      base_ingredient: $('#drink_base_ingredient').val(),
+      distilled: $('#drink_distilled').val() == 'distilled' ? true : false
+    };
+    
+    var data = JSON.stringify(recommendation_params);
+    
+    $.ajax({
+      async: false,
+      timeout: 4000,
+      type: 'POST',
+      url: '/recommend_drink',
+      data: data,
+      contentType: 'application/json; charset=utf-8'
+    });
+  });
+  
+</script>

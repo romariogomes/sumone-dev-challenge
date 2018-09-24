@@ -21,10 +21,12 @@ function ready(event) {
     if (this.value === 'simple') {
       $('.simple-form').show();
       $('.advanced-form').hide();
-    }
-    else if (this.value === 'advanced') {
+      $('#results').show();
+      $('#results').html("");
+    } else if (this.value === 'advanced') {
       $('.simple-form').hide();
       $('.advanced-form').show();
+      $('#results').hide();
     }
   });
 
@@ -39,6 +41,23 @@ function ready(event) {
         data: data,
         contentType: 'application/json; charset=utf-8'
     });
+  });
+
+  $( "#advancedSearch" ).change(function() {
+    
+    var isAdvancedSearchChecked = $('#advancedSearch:checked').length == 1 ? true : false;
+    if (advancedSearch) {
+      $('#drink_name').val('');
+      var data = JSON.stringify({ load_form: true});
+      $.ajax({
+        async: false,
+        timeout: 4000,
+        type: 'POST',
+        url: '/load_preferences_form',
+        data: data,
+        contentType: 'application/json; charset=utf-8'
+      });  
+    }
   });
 }
 

@@ -35,9 +35,6 @@ gem 'pry'
 gem 'will_paginate', '~> 3.1.1'
 gem 'will_paginate-bootstrap'
 
-# console pretty print
-gem 'hirb'
-
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-jquery'
