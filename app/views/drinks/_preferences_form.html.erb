@@ -1,6 +1,15 @@
 <div class="container">
   <div class="form-group">
     <h4>Set your drink preferences</h4>
+
+    <div>
+      <i class="required-fields-warning">* required fields</i>
+    </div>
+    <div class="alert alert-danger" id="error-msg" style="display: none;" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      Please fill the required fields
+    </div>
     <%= form_tag do %>
       <div class="preferences-form-field">
         <% min_alcoholic_level = Drink.all.min_by(&:alcohol_level).alcohol_level.to_i %>
@@ -11,16 +20,16 @@
         <%= number_field(:drink, :alcohol_level, in: min_alcoholic_level..max_alcoholic_level, step: 1, class: 'form-control', placeholder: 'e.g. 30') %>
       </div>
       <div class="preferences-form-field">
-        <%= label_tag 'base_ingredient', 'Base ingredient' %>
+        <%= label_tag 'base_ingredient', 'Base ingredient *' %>
         <%= collection_select(:drink, :base_ingredient, Drink.all.order(:base_ingredient).uniq { |drink| drink.base_ingredient }, :base_ingredient, :base_ingredient, {:prompt=> 'Select your favorite base ingredient'}, {:class => 'form-control'}) %>
       </div>
       <div class="preferences-form-field">
-        <%= label_tag 'temperature', 'Temperature' %>
+        <%= label_tag 'temperature', 'Temperature *' %>
         <%= collection_select(:drink, :temperature, drinks_temperature.sort_by { |drink| drink.temperature }, :temperature, :temperature, {:prompt=> 'Select your favorite drink temperature'}, {:class => 'form-control'}) %>
       </div>
 
       <div class="preferences-form-field">
-        <%= label_tag 'temperature', 'Type' %>
+        <%= label_tag 'temperature', 'Type *' %>
         <%= select(:drink, :distilled, ['distilled', 'fermented'], {:prompt=> 'Select your favorite drink type'}, {:class => 'form-control'}) %>
       </div>
       <div class="preferences-form-field">
@@ -35,12 +44,21 @@
 <script>
 
 $('#search-recommendations-btn').click(function() {
+
+  var alcohol_level = $('#drink_alcohol_level').val().trim();
+  var temperature = $('#drink_temperature').val().trim();
+  var base_ingredient = $('#drink_base_ingredient').val().trim();
+  var distilled = $('#drink_distilled').val().trim() == 'distilled' ? true : false;
+
+  if (distilled != '' && temperature != '' && base_ingredient != '') {
+    
+    $('#error-msg').hide();
     var recommendation_params = {
       // authenticity_token: $('meta[name="csrf-token"]').attr("content"),
-      alcohol_level: $('#drink_alcohol_level').val(),
-      temperature: $('#drink_temperature').val(),
-      base_ingredient: $('#drink_base_ingredient').val(),
-      distilled: $('#drink_distilled').val() == 'distilled' ? true : false
+      alcohol_level: alcohol_level,
+      temperature: temperature,
+      base_ingredient: base_ingredient,
+      distilled: distilled
     };
     
     var data = JSON.stringify(recommendation_params);
@@ -53,6 +71,12 @@ $('#search-recommendations-btn').click(function() {
       data: data,
       contentType: 'application/json; charset=utf-8'
     });
-  });
+
+  } else {
+
+    $('#error-msg').show();
+
+  }
+});
   
 </script>

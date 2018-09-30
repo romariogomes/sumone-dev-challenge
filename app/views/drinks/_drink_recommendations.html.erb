@@ -2,7 +2,16 @@
   <% if @drinks.size == 0 %>
     <h4>Nenhum resultado encontrado</h4>
   <% else %>
-    <%= @drinks.size %> <%= 'Result'.pluralize @drinks.size %>
+    <div class="result-info">
+      <div class="result-info-badge">
+        <%= @drinks.size %> <%= 'Suggestion'.pluralize @drinks.size %>  
+      </div>
+      <div class="result-info-badge new-recommendation">
+        <%= link_to 'javascript:;', id: "new-recommendations-btn", remote: true do %>
+          New Drink recommendation
+        <% end %>
+      </div>
+    </div>
     <% @drinks.each do |drink| %>
       <div class="card drink-card">
         <%= image_tag drink.image_url, class: 'drink-card__img' %>
@@ -22,3 +31,12 @@
     <% end %>
   <% end %>
 </div>
+
+<script>
+
+$('#new-recommendations-btn').click(function() {
+
+  $(".advanced-form").html("<%= escape_javascript(render partial: 'preferences_form') %>");
+});
+  
+</script>

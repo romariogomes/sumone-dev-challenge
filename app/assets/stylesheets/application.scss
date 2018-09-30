@@ -74,13 +74,12 @@
 }
 
 .advanced-form {
-  margin-top: 20px;
+  // margin-top: 20px;
   padding: 1% 15% 1% 15%;
 }
 
 .drinks-list {
-  margin-top: 40px;
-
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,4 +108,31 @@
   padding: 10px 0px;
 }
 
+i.required-fields-warning{
+  font-size: 10px;
+}
 
+div.drink-tag {
+  display: inline-block;
+  background: #BE596B;
+  color: #fff;
+  padding: 5px;
+  font-size: 12px;
+  margin: 0px 5px;
+}
+
+div.result-info{
+  width: 100%;
+  display: inherit;
+  margin-bottom: 5px;
+}
+
+div.result-info div.result-info-badge {
+  display: inline-block;
+  width: 50%;
+  postion: relative;
+}
+
+div.result-info-badge.new-recommendation{
+  text-align: right;
+}

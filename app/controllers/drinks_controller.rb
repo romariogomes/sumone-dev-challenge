@@ -25,33 +25,64 @@ class DrinksController < ApplicationController
   end
 
   def recommend_drink
-  	@suggestion = []
+  	@drinks = []
   	alcohol_level = params['alcohol_level']
   	distilled = params['distilled']
   	base_ingredient = params['base_ingredient']
   	temperature = params['temperature']
 
-  	if distilled.present? && base_ingredient.present? && temperature.present?
-  		recommended_drink = Drink.where(base_ingredient: base_ingredient).where(distilled: distilled).where(temperature: temperature)
-  		if recommended_drink.empty?
-  			recommended_drink = Drink.where(base_ingredient: base_ingredient).or(Drink.where(distilled: distilled).or(Drink.where(temperature: temperature)))
-
-  		end
-  	elsif distilled.present? || base_ingredient.present? || temperature.present?
-  		
-
-  	end
+  	drinks = get_drinks
   	
+  	exact_match = drinks.find_all {|drink| drink.base_ingredient == base_ingredient &&
+									drink.distilled == distilled &&
+									drink.temperature == temperature
+								  }
+	
+	at_least_two_matches = drinks.find_all {|drink| (drink.base_ingredient == base_ingredient && drink.distilled == distilled) ||
+											(drink.base_ingredient == base_ingredient && drink.temperature == temperature) ||
+							  				(drink.temperature == temperature && drink.distilled == distilled)
+							  			   }	
+	
+	at_least_one_match = drinks.find_all {|drink| drink.base_ingredient == base_ingredient ||
+										  drink.distilled == distilled ||
+									      drink.temperature == temperature
+								  		 }
+	
+	if !exact_match.empty?
+		exact_match = exact_match.sort_by {|drink| drink.rating_avg}
+		exact_match = exact_match.reverse
+		exact_match.each do |em|
+	    	@drinks.push(em)
+	    end	
+	end
 
-  	@sugestion = recommended_drink.uniq { |drink| drink.name }
-  	# f.sort_by{|d| d.rating_avg}
-  	# f = f.reverse
-  	# recommended_drink = Drink.where(base_ingredient: base_ingredient).or(Drink.where(name: 'Mojito'))
+	if !at_least_two_matches.empty?
+		at_least_two_matches = at_least_two_matches.sort_by {|drink| drink.rating_avg}
+		at_least_two_matches = at_least_two_matches.reverse
+		at_least_two_matches.each do |tm|
+	    	@drinks.push(tm)
+	    end	
+	end
 
+	if !at_least_one_match.empty?
+		at_least_one_match = at_least_one_match.sort_by {|drink| drink.rating_avg}
+		at_least_one_match = at_least_one_match.reverse
+		at_least_one_match.each do |om|
+	    	@drinks.push(om)
+	    end	
+	end
+	
+	if @drinks.empty?
+		@drinks = drinks.sort_by {|drink| drink.rating_avg}
+		@drinks = @drinks.reverse
+	else
+		@drinks = @drinks.uniq { |drink| drink.name }	
+	end
+  	
+  	respond_to do |format|
+	  format.js {render layout: false}
+	end
 
-
-  	require 'pry'
-  	binding.pry
   end
 
   def calc_closest_alcohol_level_preference(level)
