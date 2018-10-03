@@ -5,15 +5,16 @@ class DrinksController < ApplicationController
 
   def search_drink
   	drinks_list = get_drinks
-  	drink_name = params['drink_name'].downcase
+  	drink_name = params['drink_name']
   	@drinks = []
 
     drinks_list.each do |dl|
-    	@drinks.push(dl) if dl.name.downcase.include?(drink_name)
+    	@drinks.push(dl) if dl.name.downcase.include?(drink_name.downcase)
     end
     
     respond_to do |format|
 	  format.js {render layout: false}
+	  format.json { render json: @drinks.to_json }
 	end
   	
   end
